@@ -1,1 +1,2 @@
-# HomeworkJava
+# CrocHomeworkJava
+Hello!
