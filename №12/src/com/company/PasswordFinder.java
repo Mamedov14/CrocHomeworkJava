@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class PasswordFinder extends Thread {
 
-
+    static String hash = "40682260CC011947FC2D0B1A927138C5";
     volatile private char[] word = new char[]{
 /*
 
@@ -21,12 +21,12 @@ public class PasswordFinder extends Thread {
 */
     };
 
-    private final String hash;
+//    private final String hash;
+//
+//    public PasswordFinder(String hash) {
+//        this.hash = hash;
+//    }
     private static final char[] HEX_DIGITS = "0123456789ABCDEF".toCharArray();
-
-    public PasswordFinder(String hash) {
-        this.hash = hash;
-    }
 
 
     // попытка №2 - это безумие, но ...
@@ -56,7 +56,7 @@ public class PasswordFinder extends Thread {
                                     }
 
                                     String password = Arrays.toString(word);
-                                    // String temp = "passwrd";
+                                    String temp = "passwrd";
                                     System.out.println(password);
                                     if (hashPassword(password).equals(hash)) {
                                         System.out.println(password);
@@ -70,6 +70,38 @@ public class PasswordFinder extends Thread {
                 }
             }
         }
+    }
+
+//    public static String findPassword(String p, int length) {
+//        return findPassword(p, length, new StringBuilder());
+//    }
+
+    public static String findPassword(int length, StringBuilder str) {
+        // System.out.println(str);
+        // Stop condition, password and trial have same length
+        if (length == str.length()) {
+            if (hashPassword(str.toString()).equals(hash)) {
+                return str.toString();
+            } else {
+                return "";
+            }
+        }
+
+        String s;
+
+        for (char c = 'a'; c <= 'z'; c++) {
+            // Add a new character to the given prefix
+            str.append(c);
+            // Try to find a password for the new prefix
+            s = findPassword(length, str);
+            if (!s.equals("")) {
+                return s;
+            }
+            // Didn't work out, remove the character
+            str.deleteCharAt(str.length() - 1);
+        }
+        // All chars have been tried without success, go up one level
+        return "";
     }
 
 
@@ -102,4 +134,6 @@ public class PasswordFinder extends Thread {
     public void run() {
         find();
     }
+
+
 }
