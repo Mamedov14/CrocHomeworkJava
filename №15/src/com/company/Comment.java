@@ -3,6 +3,7 @@ package com.company;
 public class Comment {
 
     private String content;
+    private int time;
 
     public Comment(String content) {
         this.content = content;
@@ -14,6 +15,9 @@ public class Comment {
 
     @Override
     public String toString() {
-        return content;
+        return "Comment{" +
+                "content='" + content + '\'' +
+                ", time=" + time +
+                '}';
     }
 }

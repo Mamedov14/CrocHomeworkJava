@@ -14,7 +14,8 @@ public class CommentDto {
 
     @Override
     public String toString() {
-        return content;
+        return "CommentDto{" +
+                "content='" + content + '\'' +
+                '}';
     }
-
 }

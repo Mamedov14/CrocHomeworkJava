@@ -36,10 +36,10 @@ public class Main {
         System.out.println(blackListFilterString.filterComments(strings, x -> !blackList.contains(x)));
 
         BlackListFilter<Comment> blackListFilterComment = new BlackListFilterImpl<>();
-        System.out.println(blackListFilterComment.filterComments(comments, x -> !blackList.contains(x.toString())));
+        System.out.println(blackListFilterComment.filterComments(comments, x -> !blackList.contains(x.getContent())));
 
         BlackListFilter<CommentDto> blackListFilterCommentDto = new BlackListFilterImpl<>();
-        System.out.println(blackListFilterCommentDto.filterComments(commentDtos, x -> !blackList.contains(x.toString())));
+        System.out.println(blackListFilterCommentDto.filterComments(commentDtos, x -> !blackList.contains(x.getContent())));
 
 
     }
